@@ -1,4 +1,5 @@
 from django.db import models
+from AccountApp.models import Doctor Patient
 
 # Create your models here.
 class Appointment(models.Model):
@@ -11,10 +12,12 @@ class Appointment(models.Model):
         PENDING = "PENDING","en attente"
         CONFIRMED = "CONFIRMED", "confirmé"
         CANCELLED = "CANCELLED", "annulé"
-    status = models.CharField(max_length=10,choices=status.choice,default=status.PENDING)
-    status = models.CharField(max_length=10,choices=status.choice,default=status.PENDING)
-    duration_minutes = models.PositiveIntegerField( default = 30)
-    created_at = models.DateTimeField(auto_now_add=true)
-    updated_at = models.DateTimeField(auto_now=true)
-    appointment_date = models.DateTimeField()
-    
+        status = models.CharField(max_length=10,choices=status.choice,default=status.PENDING)
+        status = models.CharField(max_length=10,choices=status.choice,default=status.PENDING)
+        duration_minutes = models.PositiveIntegerField( default = 30)
+        created_at = models.DateTimeField(auto_now_add=True)
+        updated_at = models.DateTimeField(auto_now=True)
+        appointment_date = models.DateTimeField()
+        Doctor = models.ForeignKey("Doctor",on_delete=models.CASCADE,related_name="appointments")
+        ##patient = models.ForeignKey(AccountApp.) 
+        Patient = models.ForeignKey("Patient",on_delete=models.CASCADE,related_name="appointments")
